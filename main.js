@@ -48,24 +48,38 @@ $(document).ready(function(){
 
     var currentPage = 1; 
     var itemPerPage = 5;
-    
-    function render() {
-        ajaxGet(url)
-        .then(function(rs) {
 
-            if(currentPage === Math.ceil(rs.length / itemPerPage)) {
-                $('.nextPage').css({"pointer-events": "none"});
+    function renderNumberPage(currentPage, totalPage) {
+        let html = ``;
+
+        let firstNumber = (currentPage > 2) ? (currentPage - 2) : (1);
+        let lastNumber = (currentPage < totalPage-2) ? (firstNumber + 4) : (totalPage); 
+        for (i = firstNumber; i <= lastNumber; i++ ) {
+            html += `<li class="page-link">${i}</li>`;
+        };
+        $('.pageNumber').html(html);
+    }
+    
+    function renderBook() {
+        ajaxGet(url)
+        .then(function(data) {
+
+            let totalPage = Math.ceil(data.length / itemPerPage);
+            if(currentPage === totalPage) {
+                $('.nextBtn').addClass('hide');
             } else {
-                $('.nextPage').css({"pointer-events": "auto"});
+                $('.nextBtn').removeClass('hide');
             }
             if(currentPage === 1) {
-                $('.prevPage').css({"pointer-events": "none"});
+                $('.prevBtn').addClass('hide');
             } else {
-                $('.prevPage').css({"pointer-events": "auto"});
+                $('.prevBtn').removeClass('hide');
             }
 
+            renderNumberPage(currentPage, totalPage);
+
             let html = ``;
-            rs.map((item, index) => {
+            data.map((item, index) => {
                 if ((index >= (currentPage-1)*itemPerPage) && (index < currentPage*itemPerPage)) {
                     html += 
                     `<div class="product">
@@ -88,19 +102,17 @@ $(document).ready(function(){
         });
     }
 
-    render();
+    renderBook();
 
-    $('.page-link.nextPage').click(function() {
-        event.preventDefault();
+    $('.page-link.nextBtn').click(function() {
         currentPage++;
-        render();
+        renderBook();
         // $('.page-link').removeClass('active');
         // $('.page-link').hasClass()
     });
-    $('.page-link.prevPage').click(function() {
-        event.preventDefault();
+    $('.page-link.prevBtn').click(function() {
         currentPage--;
-        render();
+        renderBook();
         
     });
 
