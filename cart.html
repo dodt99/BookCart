@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOK</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="./cart.css">
+</head>
+
+<body>
+    <header>
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="return-home">
+                <a href="./index.html">Home</a>
+            </div>
+            <div class="cartbar">
+                <a href="#" class="cart-btn">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Giỏ hàng</span>
+                    <span class="totalProduct"></span>
+                </a>
+                <div class="cart-popup">
+                    <i class="fa fa-check-circle"></i>
+                    <span class="popup__desc">Thêm vào giỏ hàng thành công!</span>
+                    <i class="fa fa-times"></i>
+                    <a href="./cart.html" class="btn btn-info">Xem giỏ hàng và thanh toán</a>
+                </div>
+            </div>
+        </div> 
+      </div> 
+    </header>
+
+    <section class="cart">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="cart__title">
+                        <h4>GIỎ HÀNG:</h4>
+                        <span class="totalProduct"></span>
+                        <span>sản phẩm</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    <div class="cart__products">
+                        <!-- <div class="product">
+                            <div class="product__avatar">
+                                <img src="https://salt.tikicdn.com/cache/200x200/ts/product/aa/ce/e5/38cde4cbfa65e85905301a1f759d5e4d.jpg" alt="">
+                            </div>
+                            <div class="product__detail">
+                                <h4 class="product__name">Muôn kiếp nhân sinh</h4>
+                                <p class="product__author">- Tác giả: Nguyên Phong</p>
+                                <a href="#" class="delete-product">Xóa</a>
+                            </div>
+                            <div class="product__sale">
+                                <div class="product__price">
+                                    <p class="price__final">127.000đ</p>
+                                    <span id="price__regular">145.000</span>
+                                    <span id="price__sale-of">| -12%</span>
+                                </div>
+                                <div class="product__quantity">
+                                    <form action="#">
+                                        <input type="number">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>                     -->
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="cart__total-price">
+                        <span id="total-price">Thành tiền</span>
+                        <h4>252.226đ</h4>
+                    </div>
+                    <div class="cart__submit">
+                        <a href="" class="btn btn-danger">Tiến hành đặt hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./cart.js"></script>
+</body>
+
+</html>
