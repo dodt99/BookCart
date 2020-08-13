@@ -131,6 +131,7 @@ header {
 }
 .delete-product {
     color: blueviolet;
+    cursor: pointer;
 }
 
 .product__sale {

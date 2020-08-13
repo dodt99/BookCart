@@ -1,6 +1,6 @@
 
-function savePro(products) {
-    localStorage.setItem('sendProducts', JSON.stringify(products));
+function setPro(products) {
+    localStorage.setItem('products', JSON.stringify(products));
 }
 function getPro() {
     return JSON.parse(localStorage.getItem('products'));
@@ -19,7 +19,11 @@ function getTotalCart() {
     }
     return total;
 }
-$('.totalProduct').html(getTotalCart());
+
+function renderTotalCart() {
+    $('.totalProduct').html(getTotalCart());
+}
+renderTotalCart();
 
 function getTotalPrice() {
     let products = getPro();
@@ -29,7 +33,11 @@ function getTotalPrice() {
     });
     return price.toFixed(3);
 }
-$('.cart__total-price h4').html(getTotalPrice() + 'đ');
+
+function renderTotalPrice() {
+    $('.cart__total-price h4').html(getTotalPrice() + 'đ');
+}
+renderTotalPrice();
 
 function renderProducts(){
     let products = getPro();
@@ -43,7 +51,7 @@ function renderProducts(){
                 <div class="product__detail">
                     <h4 class="product__name">${item.name}</h4>
                     <p class="product__author">- Tác giả: ${item.author}</p>
-                    <a href="#" class="delete-product">Xóa</a>
+                    <a href="./cart.html" class="delete-product" id-pro=${item.id}>Xóa</a>
                 </div>
                 <div class="product__sale">
                     <div class="product__price">
@@ -62,4 +70,33 @@ function renderProducts(){
     $('.cart__products').html(html);
 }
 renderProducts();
+
+function reRender() {
+    renderProducts();
+    renderTotalPrice();
+    renderTotalCart();
+}
+
+function deleteProduct(id) {
+    let products = getPro();
+    for( var i = 0; i < products.length; i++) { 
+        if ( products[i].id === id) { 
+            products.splice(i, 1); 
+        }
+    }
+    setPro(products);
+}
+
+
+
+$( document ).ready(function() {
+    $('.delete-product').click(function() {
+        let id = $(this).attr('id-pro');
+        deleteProduct(id);
+        reRender();
+
+        // return false;
+    });
+    
+});
 
