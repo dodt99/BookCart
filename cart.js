@@ -1,3 +1,16 @@
+async function ajaxPost(url, data) {
+    let rs = null;
+    await $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+        url: url,
+        success: function(result) {
+            rs = result;
+        }
+    });
+    return rs;
+}
+
 
 function setPro(products) {
     localStorage.setItem('products', JSON.stringify(products));
@@ -107,6 +120,11 @@ function submitCart() {
         }
         dataSend.push(data);
     });
+    
+    // ajaxPost('', dataSend)
+    // .then((data) => {
+    //     console.log(data);
+    // });
     alert(JSON.stringify(dataSend));
 }
 
@@ -120,6 +138,7 @@ $(document).ready(function() {
         renderTotalCart();
         renderProducts();  
         //Chỗ này bị lỗi, khi gọi lại hàm renderProducts() thì không click vào $('.delete-product') được nữa
+        //Phải refresh lại mới click tiếp được
         //end reRender;
 
         console.log('click');
@@ -138,17 +157,3 @@ $(document).ready(function() {
     
 });
 
-// document.addEventListener("DOMContentLoaded", () => {
-
-//     let collect = document.querySelectorAll(".delete-product");
-//     for (let i = 0; i < collect.length; i++) {
-//         collect[i].addEventListener('click', function() {
-//             console.log('click');
-//             let id = $(this).attr('id-pro');
-//             console.log(id);
-//             deleteProduct(id);
-//             // reRender();
-//         });
-//     }
-   
-// });
