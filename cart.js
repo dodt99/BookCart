@@ -80,6 +80,8 @@ function renderProducts(){
     });
     
     $('.cart__products').html(html);
+    addEventDelete();
+    addEventChangeQuantity();
 }
 renderProducts();
 
@@ -99,6 +101,14 @@ function deleteProduct(id) {
     setPro(products);
 }
 
+function addEventDelete() {
+    $('.delete-product').click(function() {
+        let id = $(this).attr('id-pro');
+        deleteProduct(id); 
+        reRender();
+    });
+}
+
 function changeQuantity(id, quantity) {
     let products = getPro();
     let productChanged = products.filter((data) => {
@@ -108,6 +118,15 @@ function changeQuantity(id, quantity) {
     let index = products.indexOf(productChanged);
     products[index].quantity = quantity;
     setPro(products);  
+}
+
+function addEventChangeQuantity() {
+    $('.product__quantity input').change(function() {
+        let quantity = $(this).val();
+        let id = $(this).attr('id-pro');
+        changeQuantity(id, quantity);
+        reRender();
+    });
 }
 
 function submitCart() {
@@ -129,31 +148,9 @@ function submitCart() {
 }
 
 $(document).ready(function() {
-    $('.delete-product').click(function() {
-        let id = $(this).attr('id-pro');
-        deleteProduct(id);
-
-        // reRender();
-        renderTotalPrice();
-        renderTotalCart();
-        renderProducts();  
-        //Chỗ này bị lỗi, khi gọi lại hàm renderProducts() thì không click vào $('.delete-product') được nữa
-        //Phải refresh lại mới click tiếp được
-        //end reRender;
-
-        console.log('click');
-    });
-
-    $('.product__quantity input').change(function() {
-        let quantity = $(this).val();
-        let id = $(this).attr('id-pro');
-        changeQuantity(id, quantity);
-        reRender();
-    });
 
     $('.cart__submit a').click(function() {
         submitCart();
     });
     
 });
-
